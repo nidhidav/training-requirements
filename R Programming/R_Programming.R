@@ -122,15 +122,29 @@ game_end <- function(myboard) {
   return(winner)
 }
 
-#assign player and computer 
-if (interactive()) {
-  con <- stdin()
-} else {
-  con <- "stdin"
+#assign player and computer
+name_player <- function(){
+  name_valid <- FALSE
+  cat("X or O? ")
+  while (!name_valid){
+    if (interactive()) {
+      con <- stdin()
+    } else {
+      con <- "stdin"
+    }
+    myplayer <- readLines(con = con, n = 1)
+    cat("\n")
+    if (myplayer == "X" | myplayer == "O") {
+      name_valid <- FALSE
+      return (myplayer)
+    } else {
+      cat("Invalid selection, please enter either X or O: ", "\n")
+      name_valid <- FALSE
+    }
+  }
 }
-cat("X or O? ")
-player <- readLines(con = con, n = 1)
-cat("\n")
+
+player = name_player()
 
 if (player == 'X') {
   computer <- 'O'
